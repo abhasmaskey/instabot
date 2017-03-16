@@ -1,0 +1,63 @@
+var index = 0;
+var scrollCount = 0;
+var likeElement = document.querySelector('.coreSpriteHeartOpen');
+var nextElement = document.querySelector('.coreSpriteRightPaginationArrow');
+var buttons = 0;
+var likeCount = 0;
+
+
+function doFollow() {
+        
+    buttons = document.querySelector('button'); 
+    var hasClicked = false;
+  
+    if (buttons) {
+            var buttonText = String (buttons.innerText).toLowerCase().trim();
+            
+    
+            if (buttonText == 'follow') {
+            
+            
+              console.log('clicking on it' );
+              buttons.click();
+              hasClicked = true;
+
+            } else if (buttonText == 'following') {
+              console.log ('Skipping');
+            }
+
+        }
+    
+  
+    if (hasClicked) {
+      
+        console.log('clicked, delay period');
+      
+    } else {
+
+        if (index > buttons.length) {
+            console.log('Follow complete');
+        } else {
+            console.log('Already followed');
+        }
+        
+    }
+}
+
+function doLikeFollow() {
+    likeCount++;
+    console.log('Liked ' + likeCount);
+    var nextTime = Math.random() * (10000) + 120000;
+    likeElement.click();
+    doFollow();
+	console.log(new Date().toLocaleString());
+    setTimeout(function() {nextElement.click();}, 1000);
+    if (likeCount < 40) {
+
+        setTimeout(doLikeFollow, nextTime);
+    } else {
+        console.log('InstaBot job complete');
+    }
+}
+
+doLikeFollow();
